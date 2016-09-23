@@ -1,6 +1,6 @@
 import csv, numpy, pandas, pylab
 
-"""This method will turn my crappy attempt t a placeholder dictionary for the deck stats,
+"""This method will turn my crappy attempt at a placeholder dictionary for the deck stats,
 decklists, and sideboards into a proper dictionary."""
 
 def dict_eval(n):
@@ -12,7 +12,7 @@ def dict_eval(n):
 			placeholder[key] = int(placeholder[key])
 	return placeholder
 
-#Load the data/
+#Load the data
 	
 data=[]
 
@@ -26,7 +26,6 @@ del data[0]		#Get rid of the column headers
 
 for i in data:
 	i[0] = int(i[0])
-	print(i[0])
 	i[5] = int(i[5])
 	i[9] = dict_eval(i[9])
 	i[10] = dict_eval(i[10])
@@ -53,7 +52,7 @@ data_2 = {}		#Number of W decks
 data_3 = {}		#Number of UW decks
 data_4 = {}		#Number of UB decks
 data_5 = {}		#Number of UWR decks
-data_6 = {} 	#Number of Esper decks
+data_6 = {} 		#Number of Esper decks
 data_7 = {}		#Number of Bant decks
 data_8 = {}		#Number of Junk decks
 data_9 = {}		#Number of 4c decks
@@ -163,12 +162,11 @@ for i in data: 				#Loop over each deck in data
 data_1_lst = []
 
 for key, value in data_1.items():
-	data_1_lst.append([key, (value/len(data_10[key]))])	#Divide the number of countertop decks by the total number of decks for that period.
+	data_1_lst.append([key, (value/len(data_10[key]))])	#Divide the number of SFM decks by the total number of decks for that period.
 
 for i in data_1_lst:
 	j = [(data_2[i[0]])/len(data_10[i[0]]),\
-	#For each card, divide the number of decks that contain that card by the number
-	#of countertop decks for that date.
+	#For each date, divide each deck total by the total number of decks for that date
 	(data_3[i[0]])/len(data_10[i[0]]),\
 	(data_4[i[0]])/len(data_10[i[0]]),\
 	(data_5[i[0]])/len(data_10[i[0]]),\
@@ -185,6 +183,9 @@ data_1_pd = pandas.DataFrame(data)
 data_1_pd.columns = ["Date", "Number of SFM Decks", "Mono White", "UW",\
  "Deadguy Ale", "UWR", "Esper", "Bant", "Junk", "4c"]
 data_1_pd["Date"] = pandas.to_datetime(data_1_pd["Date"])
+
+#Make sure each column is the right type of data (floats and dates instead of strings)
+
 data_1_pd.index = data_1_pd["Date"]
 data_1_pd["Number of SFM Decks"] = data_1_pd["Number of SFM Decks"].astype(float)
 data_1_pd["Mono White"] = data_1_pd["Mono White"].astype(float)
@@ -203,7 +204,6 @@ data_2_pd = data_1_pd.set_index('Date').resample("M").mean()
 #Plot and export as a csv to be used in excel
 
 data_2_pd.plot()
-
 print(data_2_pd)
 data_2_pd.to_csv("SFM_Analysis.csv")
 pylab.show()
