@@ -47,14 +47,13 @@ didn't want to delete like number of creatures, lands, noncreature spells, etc..
 
 Now make a few empty dictionaries to analyse the data:"""
 	
-#Make a list of dates and decks that contain both counterbalance and sensei's divining top:
 
 data_1 = {}		#Number of decks with Stoneforge Mystic
 data_2 = {}		#Number of W decks
 data_3 = {}		#Number of UW decks
 data_4 = {}		#Number of UB decks
 data_5 = {}		#Number of UWR decks
-data_6 = {} 	#Number of Esper decks
+data_6 = {} 		#Number of Esper decks
 data_7 = {}		#Number of Bant decks
 data_8 = {}		#Number of 4c decks
 data_9 = {}		#Total Number of decks for that date for normalization
